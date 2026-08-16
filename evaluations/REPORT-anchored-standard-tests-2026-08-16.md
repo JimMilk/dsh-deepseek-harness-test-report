@@ -258,3 +258,47 @@ session = get_session(session_id) if session_id else get_current_session()
 
 *报告内全部数字经脚本核验（family 求和 = Ability、失败项与 hidden_summary 一致）；如发现出入，
 以 §11 原始数据为准。*
+
+---
+
+## 12. 更新（2026-08-16 下午）：新版插件（db4527a2）复测
+
+插件作者于 2026-08-16 06:54（北京）合并 `db4527a2`（self-contained modes、README 重构、
+subagent guide）。经 diff 确认，新版 `preset/agent.cordis.yml` 与旧版 `ffb845c` **仅一处注释
+文字差异，行为配置完全一致**（self-contained 重构只改仓库组织，未改 preset 行为）。
+
+### 12.1 复测结果（V4 Pro max + 新插件 db4527a2 + Project2）
+
+| 轮 | 通道 | 首行轨迹 | let_me/we | Ability | 备注 |
+|---|---|---|---|---|---|
+| R13 | web/API | **We need** | 0/75 | **96 / Class A，blockers 空** | **F3-05 首次通过（F3 满分）**，仅 F12(−1)+F9(−3) |
+| R14 | web/API | **We need** | 1/74 | **91 / B+** | F3-05 挂(−5)，其余全满 |
+| R15 | verify（修复 bug 后完整任务） | Let me | 7/77 | **88 / B+** | F3-05、F6-03、F8-03、F12-04 挂 |
+
+### 12.2 关键结论
+
+1. **插件配置未变，但新版 + web 通道下分数区间从旧版 85–90 上移至 88–96**
+   （三通道 worst 88 / best 96）。提升主要来自：轨迹稳定锚定（web 通道两轮均 "We need"、
+   let_me 0–1，显著优于旧版 web 通道冻结快照轮 let_me 23–45）与波动项（F4/F6/F8）齐过。
+2. **96 为单轮突破，非稳定常态**：R13 的 F3-05 通过是 15 轮中唯一一次；R14/R15 均回落
+   （F3-05 挂）。**F3-05（显式 session 授权语义）仍是模型不稳定短板**；F12-04 依旧全挂；
+   F9 依旧为环境上限。
+3. **通道（persona）决定首行轨迹，并影响分数**：verify/headless 通道以 headless 的 system
+   prompt 覆盖 minimal persona，首行 "Let me"（standard-like），88 分；web/API 通道 minimal
+   persona 完整生效，首行 "We need"，91/96 分。同一插件、同一模型，仅通道差异带来
+   **约 8 分差距**。
+4. **未修复的 verify-runner 取消 bug 已确认**：`stopAfterFirstAssistant` 参数无效，任务在
+   首条 assistant/message 后即被取消（只能作首请求轨迹探针，无法完成完整任务）。R15 为
+   修复该 bug（给 watch 加条件守卫）后的完整任务结果。
+
+### 12.3 更新后的全轮次汇总（15 轮）
+
+| 组 | 轮次 | Ability |
+|---|---|---|
+| 旧版 anchored（f57a1bd / ffb845c / 冻结快照，verify+web） | R1–R4、R7–R10 | 87–90 |
+| minimal / standard（web） | R5–R6 | 88–89 |
+| Linux minimal | R11 | 85 |
+| **新版 anchored db4527a2** | R13–R15 | **88–96（worst 88）** |
+
+新增评分产物：`evaluations/modeltest-run/evaluator/results/20260816_113846`（R13）、
+`20260816_124606`（R14）、`20260816_134512`（R15）。
