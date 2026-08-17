@@ -1,7 +1,7 @@
 # J-Space × DeepSeek V4-Flash 复现实验报告（2026-08-17）
 
 > 复现对象：[DeepSeek-V4-J-Space-Capability-Realization-Report](https://github.com/Tiger3807861189/DeepSeek-V4-J-Space-Capability-Realization-Report)
-> 被测环境：DeepSeek Harness 0.1.0-rc.5（源码 `/Users/jim/deepseek-harness`）+ J-Space-Cognition-Suite-V3.6（已装于 `~/.dsh/skills/j-space`）
+> 被测环境：DeepSeek Harness 0.1.0-rc.5（本地源码目录）+ J-Space-Cognition-Suite-V3.6（已装于 `~/.dsh/skills/j-space`）
 
 ## 1. 复现目标与协议
 
@@ -85,4 +85,3 @@
 - `~/.dsh/.agent-presets/jspace-standard/agent.cordis.yml` 路径修正（`/private/tmp` → `~/.dsh/skills/j-space`，上轮完成）。
 - 临时变更已恢复：`settings.yaml`（模型 v4-flash ↔ v4-pro、preset minimal ↔ jspace-minimal）已恢复原状。
 - 测试临时文件：`/tmp/jspace-repro/`（任务目录、prompt、patch、分析脚本、验证 session 日志）。
-

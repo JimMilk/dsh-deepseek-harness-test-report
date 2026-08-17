@@ -52,7 +52,7 @@ ONBOARDING_TODO.md，列出关键工程要求（安全/兼容/协议）逐条对
 - 评分：`evaluations/modeltest-run/evaluator/results/20260816_113846`（R13）、
   `20260816_124606`（R14）、`20260816_134512`（R15）、`20260816_144516`（方法 A/R16）。
 - 候选代码：`evaluations/modeltest-run_candidate_handoffs/20260816_105130|113941|125713|140354`。
-- 会话：`~/.dsh/sessions/--Users-jim-...-candidate_handoffs-20260816_*--/`。
+- 会话：`~/.dsh/sessions/`（对应候选 handoff 时间戳目录）。
 
 ## 5. 待评估问题（round-1 评估者）
 
