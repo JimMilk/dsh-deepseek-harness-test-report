@@ -14,10 +14,11 @@ Project2 工程维护评测（V4.1b frozen，官方评分器）。
 
 ## 交付对象与用途
 
-本仓库的测试结论是**交给配置了 `deepseek-v4-flash` 的 Codex 使用的**：由该 Codex
-依据测试结论落地 dsh 的本地配置——默认模型 `deepseek-v4-flash` +
-`reasoningEffort=max`、默认 preset `jspace-minimal`（Minimal 双工具 + J-Space 协议，
-纯净安装）——并对安装结果负责。报告中的复算命令与数据供其验证与延续测试。
+本仓库由**执行主体——配置了 `deepseek-v4-flash` 的 Codex 工程 Agent**——编写并驱动
+全部测试后公开交付，交付对象为 dsh 插件制作者、配置维护者以及需要复算/对照本结论的
+工程师。报告中的复算命令与原始数据供交付对象验证与延续测试；测试结论已由执行主体
+落地为 dsh 本地配置（默认模型 `deepseek-v4-flash` + `reasoningEffort=max`、默认 preset
+`jspace-minimal`，见「环境与配置」）。
 
 ## 报告索引
 
