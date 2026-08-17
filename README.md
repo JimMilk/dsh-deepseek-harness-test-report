@@ -5,6 +5,13 @@
 测试基准统一为 [`xiaobright/modeltest`](https://github.com/xiaobright/modeltest)
 Project2 工程维护评测（V4.1b frozen，官方评分器）。
 
+## 执行主体
+
+本仓库全部测试由**配置了 `deepseek-v4-flash` 的 Codex 工程 Agent** 编写并驱动；
+被测对象为搭载 DeepSeek V4 系列模型（`deepseek-v4-pro` / `deepseek-v4-flash`，
+`reasoningEffort=max`）的 DeepSeek Harness（0.1.0-rc.5）会话。
+即：**用配置了 v4-flash 的 Codex，给 DSH 做测试。**
+
 ## 报告索引
 
 | 报告 | 日期 | 内容 |
