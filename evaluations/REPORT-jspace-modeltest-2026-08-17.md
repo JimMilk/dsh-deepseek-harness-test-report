@@ -136,3 +136,29 @@
 1. 本轮 v4-Pro + J-Space **F3-05 未通过**（隐式 ambient 回退），与 v4-Flash + J-Space 8 轮中 4 轮 F3-05 全通过形成对比；也低于历史 v4-Pro Control 区间（85–90，n=11）。
 2. n=1 无统计意义：84 分受 F3-05（−5）、F6-03（−2）、F8（−2）、F9（−3.5 环境）叠加影响，单轮不能断言"J-Space 对 v4-Pro 无效"或"Pro 弱于 Flash"；需 v4-Pro 多轮同期对照才能判断。
 3. 该结果提醒：J-Space 的授权语义改善在 Flash 上稳定（4/4），在 Pro 上是否可复现未确认；若 v4-Pro 是日常主力模型，建议补跑 v4-Pro J-Space/Control 各 2–3 轮再定论。
+
+## 10. 两工具（Minimal）+ J-Space 补测（2026-08-17 20:14）
+
+补齐证据链缺口：在 **web/API 通道**装配 `jspace-minimal`（persistent bash + str_replace_editor，2 工具；临时 patch 禁用 web profile 的 vision-local，避免 3 个视觉工具混入），其余条件与 §1 完全一致（v4-flash / reasoningEffort max / 官方题面逐字 / 独立候选工作区 / 同评分器）：
+
+| 指标 | 值 |
+|---|---:|
+| Ability | **95.5**（Ship 95.5 / Class B+） |
+| family | F1=8 F2=12 **F3=16** F4=4 F5=12 F6=10 F7=8 F8=7 F9=3.5 F10=8 F11=4 F12=3 |
+| hidden 失败 | 仅 V4-F12-04（44/45；F3-05、F1-01、F6 全过） |
+| blockers | E-contract（ESP 静态 8/9）、E-build（环境） |
+| 会话核验 | 模型 v4-flash/max；tools=2（bash、str_replace_editor）；J-SPACE 协议在系统提示；approval never |
+
+评分：`evaluator/results/20260817_201432/`；候选 `modeltest-run_candidate_handoffs/20260817_jspace_v4flash_2tool/workspace`。
+
+**对比与结论**：
+
+| 条件 | Ability |
+|---|---:|
+| **2 工具 + J-Space（本轮，web 通道）** | **95.5** |
+| 25 工具 + J-Space（4 轮均值） | 93.12 |
+| 25 工具 Control（4 轮均值） | 91.38 |
+
+1. **缺口已补**：此前"两工具 + J-Space"无直接实测，本轮实测 95.5 为全部轮次最高，且 F3-05/F1-01/F6 满分、唯一 hidden 失败为模型稳定缺陷 F12-04（−1）。
+2. **方向不变且更强**：Minimal 工具面 + J-Space 无任何劣势（单轮高于 25 工具均值 2.4 分），支持"纯净安装 jspace-minimal 为默认"的决策；单轮样本仍不主张工具面因果，但证据链完整。
+3. **工具面差异确认**：本轮的 2 工具（bash + str_replace_editor）与 §1 的 25 工具对照在同模型/同题面下完成同等任务；两工具模式下工具调用更多（112 次 vs 25 工具均值约 30–60 次），总耗时约 26 分钟，处于同量级。

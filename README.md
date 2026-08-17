@@ -12,12 +12,19 @@ Project2 工程维护评测（V4.1b frozen，官方评分器）。
 `reasoningEffort=max`）的 DeepSeek Harness（0.1.0-rc.5）会话。
 即：**用配置了 v4-flash 的 Codex，给 DSH 做测试。**
 
+## 交付对象与用途
+
+本仓库的测试结论是**交给配置了 `deepseek-v4-flash` 的 Codex 使用的**：由该 Codex
+依据测试结论落地 dsh 的本地配置——默认模型 `deepseek-v4-flash` +
+`reasoningEffort=max`、默认 preset `jspace-minimal`（Minimal 双工具 + J-Space 协议，
+纯净安装）——并对安装结果负责。报告中的复算命令与数据供其验证与延续测试。
+
 ## 报告索引
 
 | 报告 | 日期 | 内容 |
 |---|---|---|
-| [J-Space × DeepSeek V4 总汇总](evaluations/SUMMARY-jspace-tests-2026-08-17.md) | 2026-08-17 | 9 轮 modeltest 对照 + 3 任务复现实验 |
-| [J-Space modeltest 对照报告](evaluations/REPORT-jspace-modeltest-2026-08-17.md) | 2026-08-17 | v4-Flash 8 轮对照 + v4-Pro 单轮 |
+| [J-Space × DeepSeek V4 总汇总](evaluations/SUMMARY-jspace-tests-2026-08-17.md) | 2026-08-17 | 10 轮 modeltest（含 2 工具补测）+ 3 任务复现实验 |
+| [J-Space modeltest 对照报告](evaluations/REPORT-jspace-modeltest-2026-08-17.md) | 2026-08-17 | v4-Flash 8 轮对照 + v4-Pro 单轮 + 2 工具补测 |
 | [J-Space v4-Flash 复现实验](evaluations/REPORT-jspace-v4flash-repro-2026-08-17.md) | 2026-08-17 | 3 任务开关实验（token/耗时/工具调用） |
 | [anchored-standard 多环境实测](evaluations/REPORT-anchored-standard-tests-2026-08-16.md) | 2026-08-16 | 3 环境、4 preset、11 轮完整评测（V4 Pro） |
 | [调用方法实验](evaluations/METHOD-EXPERIMENTS.md) | 2026-08-16 | R13–R17 基线/方法 A/B + 10 次采样共性收敛 |
@@ -29,9 +36,12 @@ Project2 工程维护评测（V4.1b frozen，官方评分器）。
 1. **J-Space 对 v4-Flash 有方向性显著提升**：modeltest Ability 均值 93.12 vs 91.38
    （+1.75），配对 t=2.65（n=4，单尾 p≈0.04）；关键项 **F3-05（显式 session 授权）
    J-Space 4/4 通过、Control 3/4**；无一轮低于对照、波动更小（sd 1.11 vs 2.17）。
-2. **F12-04 两条件 8 轮全挂**（已知模型稳定缺陷）；F9（ESP-IDF 真机构建）受本机无工具链限制。
-3. **v4-Pro + J-Space 单轮 84.0**（F3-05 未通过），n=1 不作结论，需多轮对照确认。
-4. 实验保持题面纯净：任务文本与官方 CANDIDATE_PROMPT 逐字一致，未加入针对测试项目的显式约束。
+2. **两工具（Minimal）+ J-Space 补测 95.5（最高）**：web/API 通道装配 `jspace-minimal`
+   （bash + str_replace_editor），F3-05/F1-01/F6 满分，唯一 hidden 失败为模型稳定缺陷
+   F12-04（−1）；补齐"webui 实际形态"的直接实测证据。
+3. **F12-04 各条件多轮全挂**（已知模型稳定缺陷）；F9（ESP-IDF 真机构建）受本机无工具链限制。
+4. **v4-Pro + J-Space 单轮 84.0**（F3-05 未通过），n=1 不作结论，需多轮对照确认。
+5. 实验保持题面纯净：任务文本与官方 CANDIDATE_PROMPT 逐字一致，未加入针对测试项目的显式约束。
 
 ### anchored-standard × V4 Pro 多环境（2026-08-16）
 
@@ -57,7 +67,7 @@ Project2 工程维护评测（V4.1b frozen，官方评分器）。
 |---|---|
 | [reports-data/all-results-summary.json](reports-data/all-results-summary.json) | anchored-standard 11 轮 score_draft 汇总（ability/family/blockers/失败项） |
 | [reports-data/trajectory-summary.json](reports-data/trajectory-summary.json) | macOS 各轮会话 reasoning 词频（let_me/we）与首行 |
-| [reports-data/jspace-modeltest-results-summary.json](reports-data/jspace-modeltest-results-summary.json) | J-Space 9 轮评分摘要（含 family 明细与 hidden 失败项） |
+| [reports-data/jspace-modeltest-results-summary.json](reports-data/jspace-modeltest-results-summary.json) | J-Space 10 轮评分摘要（含 family 明细与 hidden 失败项） |
 | [reports-data/README.md](reports-data/README.md) | 数据文件说明与来源指引 |
 
 ## 环境与配置

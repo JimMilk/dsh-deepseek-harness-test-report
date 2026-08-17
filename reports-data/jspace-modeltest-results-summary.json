@@ -1,6 +1,6 @@
 {
  "benchmark": "project2-v4.1b",
- "model": "deepseek-v4-flash/v4-pro",
+ "models": "deepseek-v4-flash / v4-pro",
  "date": "2026-08-17",
  "runs": [
   {
@@ -217,6 +217,29 @@
     "V4-F3-05",
     "V4-F12-04",
     "V4-F6-03"
+   ]
+  },
+  {
+   "run": "jspace-v4flash-2tool",
+   "ability": 95.5,
+   "ship": 95.5,
+   "class": "B+",
+   "family": {
+    "F1": 8.0,
+    "F2": 12.0,
+    "F3": 16.0,
+    "F4": 4.0,
+    "F5": 12.0,
+    "F6": 10.0,
+    "F7": 8.0,
+    "F8": 7.0,
+    "F9": 3.5,
+    "F10": 8.0,
+    "F11": 4.0,
+    "F12": 3.0
+   },
+   "hidden_fails": [
+    "V4-F12-04"
    ]
   }
  ]
