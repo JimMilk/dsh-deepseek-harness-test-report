@@ -2,3 +2,7 @@ artifacts/
 evaluations/reports/
 evaluations/ITERATION-LOG.md
 evaluations/BASELINE.sha256
+
+# 外部评测工具仓库（modeltest clone，含独立 remote）与本地候选工作区数据（不入库）
+evaluations/modeltest-run/
+evaluations/modeltest-run_candidate_handoffs/

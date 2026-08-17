@@ -28,3 +28,37 @@
    叠加模型缺陷后理论上限 91）。
 
 详见完整报告（含全部数据来源与复算命令）。
+
+---
+
+# J-Space × DeepSeek V4 测试（2026-08-17）
+
+## 项目说明
+
+- **插件项目**：[`Tiger3807861189/J-Space-Cognition-Suite-V3.6`](https://github.com/Tiger3807861189/J-Space-Cognition-Suite-V3.6)
+  （J-Space 推理时认知控制套件，已纯净安装为 dsh 默认 preset `jspace-minimal`）
+- **测试项目**：[`xiaobright/modeltest`](https://github.com/xiaobright/modeltest)
+  （Project2 工程维护评测，V4.1b frozen）
+- **执行主体**：Codex 工程 Agent 编写并驱动；被测对象为 DeepSeek Harness（0.1.0-rc.5）会话
+  （v4-Flash 8 轮 + v4-Pro 1 轮，均 reasoningEffort=max）。
+
+## 内容
+
+- 总汇总：[evaluations/SUMMARY-jspace-tests-2026-08-17.md](evaluations/SUMMARY-jspace-tests-2026-08-17.md)
+- modeltest 对照报告：[evaluations/REPORT-jspace-modeltest-2026-08-17.md](evaluations/REPORT-jspace-modeltest-2026-08-17.md)
+- V4-Flash 复现实验：[evaluations/REPORT-jspace-v4flash-repro-2026-08-17.md](evaluations/REPORT-jspace-v4flash-repro-2026-08-17.md)
+- 9 轮评分摘要：[reports-data/jspace-modeltest-results-summary.json](reports-data/jspace-modeltest-results-summary.json)
+
+## 核心结论（摘要）
+
+1. **J-Space 对 v4-Flash 有方向性显著提升**：modeltest Ability 均值 93.12 vs 91.38（+1.75），
+   配对 t=2.65（n=4，单尾 p≈0.04）；关键项 **F3-05（显式 session 授权）J-Space 4/4 通过、
+   Control 3/4**；无一轮低于对照、波动更小。
+2. **F12-04 两条件 8 轮全挂**（已知模型稳定缺陷）；F9（ESP-IDF 真机构建）受本机无工具链限制。
+3. **v4-Pro + J-Space 单轮 84.0**（F3-05 未通过），n=1 不作结论。
+4. 实验保持题面纯净：任务文本与官方 CANDIDATE_PROMPT 逐字一致，未加入针对测试项目的显式约束。
+
+## 环境与配置
+
+- dsh 0.1.0-rc.5；默认模型 `deepseek-v4-flash` / reasoningEffort max；默认 preset `jspace-minimal`。
+- `~/.dsh/.agent-presets/` 仅 `jspace-minimal`；`~/.dsh/skills/` 仅 `j-space`。
